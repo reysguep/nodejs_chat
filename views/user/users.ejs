@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <%- include('../includes/start.ejs') %>
+        <link rel="stylesheet" href="/css/user.css">
+        <title>Users</title>
+    </head>
+
+    <body>
+        <%- include('../includes/header.ejs') %>
+
+        <main>
+            <h1>Users</h1>
+
+            <% if(admin) { %>
+                <a href="/admin/users/add-user" class="article-link">
+                    <article class="user-article add-user">
+                        <p>+</p>
+                    </article>
+                </a>
+            <% } %>
+            
+            <% for(let user of users) { %>
+                <a href="/user/<%= user.username %>" class="article-link">
+                    <article class="user-article">
+                        <h2>@<%= user.username %></h2>
+                        <img src="<%= user.pictureUrl %>">
+                    </article>
+                </a>
+            <% } %>
+
+        </main>
+
+        <%- include('../includes/footer.ejs') %>
+    </body>
+
+</html>

@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <%- include('../includes/start.ejs') %>
+        <link rel="stylesheet" href="css/chat.css">
+        <title>Administrator</title>
+    </head>
+
+    <body>
+        <%- include('../includes/header.ejs') %>
+
+        <main>
+            <div>
+                <h2>Manage</h2>
+                <ul>
+                    <li><a href="/admin/messages">Manage messages</a></li>
+                    <li><a href="/admin/users">Manage users</a></li>
+                </ul>
+
+                <hr>
+                
+                <h2>Delete</h2>
+                <ul>
+                    <li><a href="/admin/clearPublic">Clear Public Chat</a></li>
+                    <li><a href="/admin/clearPrivate">Clear Private Chat</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <%- include('../includes/footer.ejs') %>
+    </body>
+
+</html>

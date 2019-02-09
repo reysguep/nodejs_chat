@@ -1,0 +1,9 @@
+html, body {
+    margin: 0;
+    width: 100%;
+}
+
+main {
+    background-color: rgb(234, 233, 255);
+    padding: 20px;
+}

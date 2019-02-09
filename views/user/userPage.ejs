@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <%- include('../includes/start.ejs') %>
+        <title><%= user.name %></title>
+    </head>
+
+    <body>
+        <%- include('../includes/header.ejs') %>
+
+        <main>
+            <h1>@<%= user.username %> profile</h1>
+            <img src="<%= user.pictureUrl %>">
+            <h2>Name: <%= user.name %></h2>
+            <h2>Status: <%= user.status %></h2>
+
+            <% if(admin) { %>
+                <a href="/admin/users/edit/<%= user.username %>">Edit</a>
+            <% } %>
+        </main>
+
+        <%- include('../includes/footer.ejs') %>
+    </body>
+
+</html>

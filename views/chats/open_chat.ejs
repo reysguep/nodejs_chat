@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <%- include('../includes/start.ejs') %>
+        <link rel="stylesheet" href="css/chat.css">
+        <title>Public Chat</title>
+    </head>
+
+    <body>
+        <%- include('../includes/header.ejs') %>
+
+        <main>
+            <div id="chat">
+                <div id="messages">
+                    <% for(let newMsg of allMessages) { %>
+                        <div class="msg">
+                            <span class="msg_author"><%= newMsg.author%></span>
+                            <span class="msg_content"><%= newMsg.content%></span>
+                        </div>
+                        <hr>
+                    <% } %>
+                </div>
+                <form action="/" method="POST" id="send_form">
+                    <input id="text_field" type="text" name="message" autocomplete="off" autofocus>
+                </form>
+            </div>
+        </main>
+
+        <%- include('../includes/footer.ejs') %>
+    </body>
+    
+</html>

@@ -1,0 +1,31 @@
+<% if(allMessages.length > 0) { %>
+<table id="msg_table">
+    <colgroup>
+        <col class="index_c">
+        <col class="author_c">
+        <col class="message_c">
+        <col class="edit_c">
+        <col class="delete_c">
+    </colgroup>
+
+    <tr>
+        <th>#</th>
+        <th>Author</th>
+        <th>Message</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+
+    <% for(let msg of allMessages) { %>
+        <tr>
+            <td> <%= msg.id %> </td>
+            <td> <%= msg.author %> </td>
+            <td> <%= msg.content %> </td>
+            <td class="action edit_btn icon"></td>
+            <td class="action delete_btn icon"></td>
+        </tr>
+    <% } %>
+</table>
+<% } else { %>
+    <h1>There are no messages.</h1>
+<% } %>

@@ -1,0 +1,43 @@
+a.article-link {
+    display: inline-block;
+    margin: 10px;
+    text-decoration: none;
+}
+
+.user-article {
+    width: 200px;
+    height: 250px;
+    background: rgb(235, 226, 255);
+
+    border-color: rgb(9, 62, 109);
+    border-radius: 5px;
+    border-width: 3px;
+    border-style: solid;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.user-article img {
+    width: 100%;
+}
+
+.user-article.add-user p{
+    font-size: 50px;
+    color: white;
+    font-weight: bolder;
+    text-align: center;
+
+    width: 75px;
+    height: 75px;
+
+    text-decoration: none;
+    
+    display: block;
+    padding: auto;
+    margin: auto;
+    margin-top: 88px;
+    background-color: rgb(146, 181, 212);
+    border-radius: 40px;
+    border-width: 2px;
+}

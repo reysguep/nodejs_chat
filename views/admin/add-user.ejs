@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <%- include('../includes/start.ejs') %>
+    <link rel="stylesheet" href="/css/add-user.css">
+    <script src="/js/user/add-user.js"></script>
+    <title>New User</title>
+</head>
+
+<body>
+    <%- include('../includes/header.ejs') %>
+
+    <main>
+        <form class="add-user-form" method="POST">
+            <div class="input-f">
+                <label for="name_input">Name: </label> <br>
+                <input type="text" name="name" id="name_input">
+            </div>
+
+            <div class="input-f">
+                <label for="username_input">Username: </label> <br>
+                <input type="text" name="username" id="username_input">
+            </div>
+
+            <div class="input-f">
+                <label for="image-url_input">Image URL: </label> <br>
+                <input type="text" name="imageUrl" id="image-url_input">
+            </div>
+
+            <div class="input-f">
+                <label for="status_input">Status: </label> <br>
+                <textarea name="status" id="status_input" maxlength="70" rows="4"></textarea>
+            </div>
+
+            <div class="input-f">
+                <label for="password_input">Password: </label> <br>
+                <input type="password" name="password" id="password_input">
+            </div>
+
+            <div class="input-f">
+                <label for="password_input">Confirm password: </label> <br>
+                <input type="password" name="confPassword" id="conf-password_input">
+            </div>
+
+            <button type="submit">GO!</button>
+        </form>
+    </main>
+
+    <%- include('../includes/footer.ejs') %>
+</body>
+
+</html>
