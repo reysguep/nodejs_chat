@@ -63,11 +63,12 @@ exports.editMessage = (req, res) => {
 }
 
 exports.getUsersAdmin = (req, res) => {
-    const users = User.fetchAll();
-    res.render(path.join(rootDir, 'views', 'user', 'users'), {
-        path: '/admin',
-        users: users,
-        admin: true
+    const users = User.fetchAll(users => {
+        res.render(path.join(rootDir, 'views', 'user', 'users'), {
+            path: '/admin',
+            users: users,
+            admin: true
+        });
     });
 }
 
@@ -92,28 +93,38 @@ exports.postAddUser = (req, res) => {
     }
 
     let response = {
-        message: 'User created succesfully!',
-        success: true
+        message: 'There was an error!',
+        success: false
     };
 
-    if (!validaNewUser.validate(addUserForm, User.fetchAll())) {
-        response = {
-            message: 'There was an error!',
-            success: false
-        };
+    User.fetchAll(users => {
+        if (validaNewUser.validate(addUserForm, users)) {
 
-        res.send(response);
-    } else {
-        crypt.cryptPassword(addUserForm.pass, (passHash) => {
-            const user = new User(addUserForm.username, addUserForm.name,
-                addUserForm.status, addUserForm.imageUrl, passHash);
-            
-                user.save();
+            crypt.cryptPassword(addUserForm.password, (err, passHash) => {
+                if (err) {
+                    console.log(err);
+                    res.send(response);
+                } else {
+                    const user = new User(addUserForm.username, addUserForm.name,
+                        addUserForm.status, addUserForm.imageUrl, passHash);
 
-                res.send(response);
-        });
-    }
+                    user.save(err => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            response = {
+                                message: 'User created successfully',
+                                success: true
+                            };
+                        }
 
+                        res.send(response);
+                    });
+                }
+            });
+        } else {
+            res.send(response);
+        }
+    })
 
-    
 }

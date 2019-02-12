@@ -9,7 +9,10 @@ exports.validate = (newUserData, allUsers) => {
     return valid;
 }
 
-function validateName(name, valid) {
+function validateName(name) {
+    if(name.length < 1)
+        return false;
+
     return true;
 }
 
@@ -33,6 +36,9 @@ function validateStatus(status) {
 }
 
 function validatePassword(password, confPassword) {
+    if(password.length < 1)
+        return false;
+    
     if (password.localeCompare(confPassword) != 0)
         return false;
 

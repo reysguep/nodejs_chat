@@ -1,46 +1,68 @@
-const users = [];
+const db = require('../util/database');
 
 module.exports = class User {
-    constructor(username, name, status, pictureUrl, passHash) {
+    constructor(username, name, status, pictureUrl, password) {
         this.username = username;
         this.name = name;
-        this.passHash = passHash;
+        this.password = password;
         this.status = status;
         this.pictureUrl = pictureUrl;
     }
 
-    save() {
-        users.push(this);
+    save(cb) {
+        db.execute('INSERT INTO User (username, name, status, pictureUrl, password)' +
+            'VALUES(?, ?, ?, ?, ?)', [this.username, this.name, this.status, this.pictureUrl, this.password]
+        )
+            .then(() => {
+                cb();
+            })
+            .catch(err => {
+                cb(err);
+            });
     }
 
-    edit(newUsername, newName, newStatus, newPictureUrl, newPassHash) {
+    edit(newUsername, newName, newStatus, newPictureUrl, newPassword) {
         this.username = newUsername;
         this.name = newName;
         this.status = newStatus;
         this.pictureUrl = newPictureUrl;
-        this.passHash = newPassHash;
+        this.passwors = newPassword;
     }
 
-    delete() {
-        for(let i = 0; i < users.length; i++) {
-            if(users[i].username == this.username) {
-                users.splice(i, 1);
-                return;
-            }
-        }
+    delete(cb) {
+        db.execute('DELETE FROM User WHERE username = ?', [this.username]);
     }
 
-    static get(username) {
-        for(let usr of users) {
-            if(usr.username == username) {
-                return usr;
-            }
-        }
-
-        return null;
+    static get(username, cb) {
+        db.execute('SELECT * FROM User WHERE username = ?', [username])
+            .then(([rows, fieldData]) => {
+                let row = rows[0];
+                if (row) {
+                    let user = new User(row.username, row.name, row.status, row.pictureUrl, row.password);
+                    cb(user);
+                } else
+                    cb(null);
+            })
+            .catch(err => {
+                console.log(err);
+                cb(null);
+            });
     }
 
-    static fetchAll() {
-        return users;
+    static fetchAll(cb) {
+        db.execute('SELECT * FROM User')
+            .then(([rows, fieldData]) => {
+                let users = [];
+                for (let row of rows) {
+                    let user = new User(row.username, row.name, row.status, row.pictureUrl, row.password);
+                    users.push(user);
+                }
+
+                cb(users);
+            })
+            .catch(err => {
+                console.log(err);
+                cb([]);
+            });
     }
 }
